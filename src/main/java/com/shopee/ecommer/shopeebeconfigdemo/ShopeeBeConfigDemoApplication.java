@@ -6,10 +6,10 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 
 @SpringBootApplication
 @EnableConfigServer
-public class ShopeeBeAccountDemoApplication {
+public class ShopeeBeConfigDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ShopeeBeAccountDemoApplication.class, args);
+		SpringApplication.run(ShopeeBeConfigDemoApplication.class, args);
 	}
 
 }
