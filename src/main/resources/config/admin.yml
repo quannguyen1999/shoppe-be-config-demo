@@ -1,0 +1,32 @@
+spring:
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
+#  cloud:
+#    vault:
+#      kv:
+#        enabled: true
+#      authentication: TOKEN
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+
+mybatis:
+  mapper-locations: classpath:batis/*.xml
+  type-aliases-package: com.shopee.shopeebeadmindemo.mybatis
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: TRACE
+#    feign: DEBUG
+
+
+
