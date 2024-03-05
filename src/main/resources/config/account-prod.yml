@@ -22,3 +22,11 @@ jwt:
 
 custom-security:
   issuer: http://localhost:8070
+
+eureka:
+  preferIdAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8072/eureka/
