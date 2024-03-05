@@ -30,6 +30,11 @@ services:
   microservice-config-eureka-config:
     extends:
       service: microservice-base-config
+    depends_on:
+      shopee-be-config-demo:
+        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: dev
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://shopee-be-eureka-demo:8072/eureka/
+      SPRING_CONFIG_IMPORT: configserver:http://shopee-be-config-demo:8071/
+

@@ -1,0 +1,28 @@
+server:
+  port: 8073
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+info:
+  app:
+    name: "Gateway"
+    description: "Shopee be gateway demo"
+    version: "1.0.0"
+
+#Eureka
+eureka:
+  preferIdAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8072/eureka/

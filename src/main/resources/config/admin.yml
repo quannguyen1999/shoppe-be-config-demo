@@ -1,53 +1,44 @@
+#Graphql
 spring:
+  server:
+    port: 8080
   graphql:
     graphiql:
       enabled: true
       path: /graphiql
-#  cloud:
-#    vault:
-#      kv:
-#        enabled: true
-#      authentication: TOKEN
 
+#Spring doc
 springdoc:
   swagger-ui:
     enabled: true
     path: /swagger-ui.html
 
+#MyBatis
 mybatis:
   mapper-locations: classpath:batis/*.xml
   type-aliases-package: com.shopee.shopeebeadmindemo.mybatis
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-
-#logging:
-#  level:
-#    org:
-#      springframework:
-#        security: TRACE
-#    feign: DEBUG
-
 #Config Eureka
-#Allow disabled server by call api actuator/shutdown with method post
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
   endpoint:
-    shutdown:
-      enabled: true
-  info:
-    env:
-      enabled: true
-endpoints:
-  shutdown:
-    enabled: true
+    health:
+      probes:
+        enabled: true
 info:
   app:
-    name: "accounts"
-    description: "Shopee be account demo"
+    name: "admins"
+    description: "Shopee be admin demo"
     version: "1.0.0"
 
 
