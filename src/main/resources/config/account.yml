@@ -15,6 +15,7 @@ security:
     refreshToken: 6
 
 #Config Eureka
+#Allow disabled server by call api actuator/shutdown with method post
 management:
   endpoints:
     web:

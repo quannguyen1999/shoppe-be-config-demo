@@ -29,6 +29,7 @@ mybatis:
 #    feign: DEBUG
 
 #Config Eureka
+#Allow disabled server by call api actuator/shutdown with method post
 management:
   endpoints:
     web:
