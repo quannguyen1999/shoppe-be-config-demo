@@ -50,7 +50,7 @@ services:
       file: common-config.yml
       service: microservice-config-server-config
 
-  shopee-admin:
+  shopee-be-admin-demo:
     image: "quannguyen1999/shopee-be-admin-demo"
     container_name: shopee-be-admin-demo
     ports:
@@ -58,6 +58,21 @@ services:
     extends:
       file: common-config.yml
       service: microservice-config-server-config
+
+  shopee-be-eureka-demo:
+    image: "quannguyen1999/shopee-be-eureka-demo"
+    container_name: shopee-be-eureka-demo
+    ports:
+      - "8072:8072"
+    healthcheck:
+      test: "curl --fail --silent localhost:8072/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-config-eureka-config
 
 networks:
   shopee-network:

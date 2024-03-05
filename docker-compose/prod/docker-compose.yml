@@ -1,0 +1,81 @@
+services:
+  #  rabbit:
+  #    image: rabbitmq:management
+  #    hostname: rabbitmq
+  #    ports:
+  #      - "5672:5672"
+  #      - "15672:15672"
+  #    healthcheck:
+  #      test: rabbitmq-diagnostic check_port_connectivity
+  #      interval: 10s
+  #      timeout: 5s
+  #      retries: 10
+  #      start_period: 5s
+  #    extends:
+  #      file: common-config.yml
+  #      service: network-deploy-service
+
+  postgres-shopee:
+    image: postgres
+    container_name: postgres-shopee
+    ports:
+      - "5431:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  shopee-be-config-demo:
+    image: "quannguyen1999/shopee-be-config-demo"
+    container_name: shopee-be-config-demo
+    ports:
+      - "8071:8071"
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+
+  shopee-be-accounts-demo:
+    image: "quannguyen1999/shopee-be-account-demo"
+    container_name: shopee-be-account-demo
+    ports:
+      - "8070:8070"
+    extends:
+      file: common-config.yml
+      service: microservice-config-server-config
+
+  shopee-be-admin-demo:
+    image: "quannguyen1999/shopee-be-admin-demo"
+    container_name: shopee-be-admin-demo
+    ports:
+      - "8080:8080"
+    extends:
+      file: common-config.yml
+      service: microservice-config-server-config
+
+  shopee-be-eureka-demo:
+    image: "quannguyen1999/shopee-be-eureka-demo"
+    container_name: shopee-be-eureka-demo
+    ports:
+      - "8072:8072"
+    healthcheck:
+      test: "curl --fail --silent localhost:8072/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-config-eureka-config
+
+networks:
+  shopee-network:
+    driver: "bridge"
+
+
