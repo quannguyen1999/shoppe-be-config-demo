@@ -7,13 +7,19 @@ mvn install -DskipTests -Dmaven.test.skip=true
 
 # Step 1 build
 docker build . -t quannguyen1999/shopee-be-config-demo
-> or
+# or
 mvn spring-boot:build-image (reject - buildpack to slow)
-> or 
+# or 
 mvn compile jib:dockerBuild (use this - google job fastest)
 
 # Step 2 run
 docker run -d -p 8071:8071 quannguyen1999/shopee-be-config-demo
-> or to get log   
-docker run --name shopee-config -p 8071:8071 quannguyen1999/shopee-be-config-demo
+# or to get log   
+docker run --name shopee-be-config-demo -p 8071:8071 quannguyen1999/shopee-be-config-demo
+
+# Command run Rabbit MQ
+docker run --name active-mq-test --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+
+# Command run postgres
+docker run --name postgres -p 5431:5432 POSTGRES_PASSWORD=postgres -d postgres
 
