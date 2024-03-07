@@ -1,0 +1,7 @@
+#Graphql
+spring:
+  cloud:
+    gateway:
+      httpClient:
+        connect-timeout: 10000
+        response-timeout: 20s

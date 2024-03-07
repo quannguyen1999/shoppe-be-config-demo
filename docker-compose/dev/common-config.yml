@@ -38,3 +38,9 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://shopee-be-eureka-demo:8072/eureka/
       SPRING_CONFIG_IMPORT: configserver:http://shopee-be-config-demo:8071/
 
+  microservice-config-email:
+    extends: microservice-config-eureka-config
+    environment:
+      SPRING_RABBITMQ_HOST: rabbit
+
+
