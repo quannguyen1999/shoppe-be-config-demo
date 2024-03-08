@@ -1,4 +1,15 @@
 services:
+  prometheus:
+    image: prom/prometheus:v2.48.0
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   #Grafana
   read:
     image: grafana/loki:2.9.2
@@ -194,6 +205,10 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    volumes:
+      - type: bind
+        source: ../data/rabbitmq
+        target: /var/lib/rabbitmq
     healthcheck:
       test: rabbitmq-diagnostics -q ping
       interval: 30s
@@ -264,7 +279,9 @@ services:
     ports:
       - "8073:8073"
     depends_on:
-      shopee-be-admin-demo:
+      #      shopee-be-admin-demo:
+      #        condition: service_healthy
+      shopee-be-email-demo:
         condition: service_healthy
       redis-shopee:
         condition: service_healthy
@@ -272,7 +289,7 @@ services:
       file: common-config.yml
       service: microservice-config-eureka-config
 
-  shopee-be-accounts-demo:
+  shopee-be-account-demo:
     image: "quannguyen1999/shopee-be-account-demo"
     container_name: shopee-be-account-demo
     ports:
@@ -301,10 +318,15 @@ services:
     container_name: shopee-be-email-demo
     ports:
       - "9000:9000"
+    healthcheck:
+      test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     depends_on:
       rabbit:
         condition: service_healthy
-
     extends:
       file: common-config.yml
       service: microservice-config-email

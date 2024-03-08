@@ -21,9 +21,9 @@ services:
       SPRING_CONFIG_IMPORT: configserver:http://shopee-be-config-demo:8071/
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-shopee:5432/postgres?currentSchema=qa_shopee
       SPRING_FLYWAY_URL: jdbc:postgresql://postgres-shopee:5432/postgres?currentSchema=qa_shopee
-      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: http://shopee-be-accounts-demo:8070
-      CUSTOM-SECURITY_ISSUER: http://shopee-be-accounts-demo:8070
-      CUSTOM_SECURITY_OAUTH2URL: http://shopee-be-accounts-demo:8070
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: http://shopee-be-account-demo:8070
+      CUSTOM-SECURITY_ISSUER: http://shopee-be-account-demo:8070
+      CUSTOM_SECURITY_OAUTH2URL: http://shopee-be-account-demo:8070
       CUSTOM_EMAIL_URL: http://shopee-be-email-demo:9000
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://shopee-be-eureka-demo:8072/eureka/
 
@@ -35,8 +35,8 @@ services:
         condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: dev
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://shopee-be-eureka-demo:8072/eureka/
       SPRING_CONFIG_IMPORT: configserver:http://shopee-be-config-demo:8071/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://shopee-be-eureka-demo:8072/eureka/
 
   microservice-config-email:
     extends: microservice-config-eureka-config

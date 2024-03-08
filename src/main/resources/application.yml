@@ -1,3 +1,6 @@
+server:
+  port: 8071
+
 spring:
   application:
     name: shopee-be-config-demo
@@ -22,5 +25,3 @@ management:
     health:
       probes:
         enabled: true
-server:
-  port: 8071

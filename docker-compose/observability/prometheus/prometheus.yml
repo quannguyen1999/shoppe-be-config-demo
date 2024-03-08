@@ -1,0 +1,30 @@
+global:
+  scrape_interval:     5s # Set the scrape interval to every 5 seconds.
+  evaluation_interval: 5s # Evaluate rules every 5 seconds.
+
+scrape_configs:
+  - job_name: 'shopee-be-account-demo'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'shopee-be-account-demo:8070' ]
+  - job_name: 'admin'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'shopee-be-admin-demo:8080' ]
+  - job_name: 'shopee-be-config-demo'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'shopee-be-config-demo:8071' ]
+  - job_name: 'shopee-be-eureka-demo'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'shopee-be-eureka-demo:8072' ]
+  - job_name: 'shopee-be-gateway-demo'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'shopee-be-gateway-demo:8073' ]
+  - job_name: 'shopee-be-email-demo'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'shopee-be-email-demo:9000' ]
+  

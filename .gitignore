@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+/docker-compose/data/rabbitmq/mnesia/
+/docker-compose/dev/.data/
+/docker-compose/dev/.data/
+/docker-compose/prod/.data/
+/docker-compose/dev/.data/
