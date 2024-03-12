@@ -24,9 +24,9 @@ services:
       - minio
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3100/ready || exit 1" ]
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 5
+      retries: 20
     networks: &loki-dns
       shopee-network:
         aliases:
@@ -43,9 +43,9 @@ services:
       - ../observability/loki/loki-config.yaml:/etc/loki/config.yaml
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3100/ready || exit 1" ]
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 5
+      retries: 20
     depends_on:
       - minio
     networks:
@@ -83,9 +83,22 @@ services:
       - ./.data/minio:/data
     healthcheck:
       test: [ "CMD-SHELL", "curl", "-f", "http://localhost:9000/minio/health/live" ]
-      interval: 15s
-      timeout: 20s
-      retries: 5
+      interval: 20s
+      timeout: 5s
+      retries: 20
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  tempo:
+    image: grafana/tempo
+    container_name: tempo
+    command: -config.file /etc/tempo-config.yml
+    ports:
+      - "3110:3100"
+      - "4317:4317"
+    volumes:
+      - ../observability/tempo/tempo.yml:/etc/tempo-config.yml
     extends:
       file: common-config.yml
       service: network-deploy-service
@@ -200,9 +213,9 @@ services:
         target: /var/lib/rabbitmq
     healthcheck:
       test: rabbitmq-diagnostics -q ping
-      interval: 30s
-      timeout: 30s
-      retries: 3
+      interval: 20s
+      timeout: 5s
+      retries: 20
       start_period: 5s
     extends:
       file: common-config.yml
@@ -239,13 +252,15 @@ services:
       - "8071:8071"
     healthcheck:
       test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 10s
     extends:
       file: common-config.yml
       service: microservice-base-config
+    environment:
+      OTEL_SERVICE_NAME: "shopee-be-config-demo"
 
   shopee-be-eureka-demo:
     image: "quannguyen1999/shopee-be-eureka-demo"
@@ -258,9 +273,15 @@ services:
       timeout: 5s
       retries: 10
       start_period: 10s
-    extends:
-      file: common-config.yml
-      service: microservice-config-eureka-config
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+#    extends:
+#      file: common-config.yml
+#      service: microservice-config-eureka-config
+    environment:
+      OTEL_SERVICE_NAME: "shopee-be-eureka-demo"
 
   shopee-be-gateway-demo:
     image: "quannguyen1999/shopee-be-gateway-demo"
@@ -277,6 +298,8 @@ services:
     extends:
       file: common-config.yml
       service: microservice-config-eureka-config
+    environment:
+      OTEL_SERVICE_NAME: "shopee-be-gateway-demo"
 
   shopee-be-account-demo:
     image: "quannguyen1999/shopee-be-account-demo"
@@ -286,6 +309,8 @@ services:
     extends:
       file: common-config.yml
       service: microservice-config-server-config
+    environment:
+      OTEL_SERVICE_NAME: "shopee-be-account-demo"
 
   shopee-be-admin-demo:
     image: "quannguyen1999/shopee-be-admin-demo"
@@ -294,13 +319,15 @@ services:
       - "8080:8080"
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 10s
     extends:
       file: common-config.yml
       service: microservice-config-server-config
+    environment:
+      OTEL_SERVICE_NAME: "shopee-be-admin-demo"
 
   shopee-be-email-demo:
     image: "quannguyen1999/shopee-be-email-demo"
@@ -309,9 +336,9 @@ services:
       - "9000:9000"
     healthcheck:
       test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 10s
     depends_on:
       rabbit:
@@ -319,6 +346,8 @@ services:
     extends:
       file: common-config.yml
       service: microservice-config-email
+    environment:
+      OTEL_SERVICE_NAME: "shopee-be-email-demo"
 
 networks:
   shopee-network:

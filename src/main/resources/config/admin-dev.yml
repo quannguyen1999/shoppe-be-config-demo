@@ -100,3 +100,12 @@ resilience4j.ratelimiter:
       timeoutDuration: 10000
       limitRefreshPeriod: 5000
       limitForPeriod: 1
+
+#Logging
+logging:
+  #  level:
+  #    org:
+  #      springframework:
+  #        security: TRACE
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
