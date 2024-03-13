@@ -2,12 +2,12 @@
 # shellcheck disable=SC2164
 # Define an array containing the folder names
 folders=(
-#  "shopee-be-account-demo"
-#  "shopee-be-admin-demo"
+  "shopee-be-account-demo"
+  "shopee-be-admin-demo"
   "shopee-be-config-demo"
   "shopee-be-eureka-demo"
-#  "shopee-be-gateway-demo"
-#  "shopee-be-email-demo"
+  "shopee-be-gateway-demo"
+  "shopee-be-email-demo"
 )
 
 echo "move one step folder folder"
