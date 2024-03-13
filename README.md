@@ -21,3 +21,16 @@ Access: http://localhost:8071
 # Link Dashboard import jvm micrometer:
 https://grafana.com/grafana/dashboards/4701-jvm-micrometer/
 
+# Link access k8s
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/workloads?namespace=default
+
+# run
+kubectl apply -f <each file k8s>
+
+# delete + stop 
+kubectl delete -f <each file k8s>
+
+# install helm
+brew install helm
+
+

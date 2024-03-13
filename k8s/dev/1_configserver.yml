@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopee-be-config-demo
+  labels:
+    app: shopee-be-config-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopee-be-config-demo
+  template:
+    metadata:
+      labels:
+        app: shopee-be-config-demo
+    spec:
+      containers:
+      - name: shopee-be-config-demo
+        image: quannguyen1999/shopee-be-config-demo
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8071
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopee-be-config-demo
+spec:
+  selector:
+    app: shopee-be-config-demo
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8071
+      targetPort: 8071

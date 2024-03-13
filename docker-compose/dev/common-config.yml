@@ -19,8 +19,8 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: dev
       SPRING_CONFIG_IMPORT: configserver:http://shopee-be-config-demo:8071/
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-shopee:5432/postgres?currentSchema=qa_shopee
-      SPRING_FLYWAY_URL: jdbc:postgresql://postgres-shopee:5432/postgres?currentSchema=qa_shopee
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-shopee:5431/postgres?currentSchema=qa_shopee
+      SPRING_FLYWAY_URL: jdbc:postgresql://postgres-shopee:5431/postgres?currentSchema=qa_shopee
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: http://shopee-be-account-demo:8070
       CUSTOM-SECURITY_ISSUER: http://shopee-be-account-demo:8070
       CUSTOM_SECURITY_OAUTH2URL: http://shopee-be-account-demo:8070
