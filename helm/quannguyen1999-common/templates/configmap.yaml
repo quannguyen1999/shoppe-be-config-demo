@@ -1,0 +1,25 @@
+{{- define "common.configmap" -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.global.configMapName }}
+data:
+  SPRING_PROFILES_ACTIVE: {{ .Values.global.activeProfile }}
+  SPRING_CONFIG_IMPORT: {{ .Values.global.configServerURL }}
+  SPRING_FLYWAY_URL: {{ .Values.global.flywayUrl }}
+  SPRING_DATASOURCE_URL: {{ .Values.global.dataSourceUrl }}
+  SPRING_RABBITMQ_HOST: rabbit
+  SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: {{ .Values.global.jwtIssuerUri }}
+
+#  ACCOUNT_APPLICATION_NAME: account
+#  ADMIN_APPLICATION_NAME: admin
+#  CONFIG_APPLICATION_NAME: shopee-be-config-demo
+#  EUREKA_APPLICATION_NAME: eureka
+#  GATEWAY_APPLICATION_NAME: gateway
+#  EMAIL_APPLICATION_NAME: email
+
+  CUSTOM-SECURITY_ISSUER: {{ .Values.global.customSecurityIssuer }}
+  CUSTOM_SECURITY_OAUTH2URL: {{ .Values.global.customSecurityOauth2Url }}
+  CUSTOM_EMAIL_URL: {{ .Values.global.customEmailUrl }}
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: {{ .Values.global.serviceUrlDefaultZone }}
+{{- end -}}

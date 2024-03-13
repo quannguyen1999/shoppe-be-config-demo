@@ -8,7 +8,7 @@ data:
   SPRING_CONFIG_IMPORT: configserver:http://shopee-be-config-demo:8071/
   SPRING_FLYWAY_URL: jdbc:postgresql://postgres-shopee:5431/postgres?currentSchema=qa_shopee
   SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-shopee:5431/postgres?currentSchema=qa_shopee
-  SPRING_RABBITMQ_HOST: rabbit
+  SPRING_RABBITMQ_HOST: rabbitmq
   SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: http://shopee-be-account-demo:8070
 
   ACCOUNT_APPLICATION_NAME: account
@@ -21,7 +21,7 @@ data:
   CUSTOM-SECURITY_ISSUER: http://shopee-be-account-demo:8070
   CUSTOM_SECURITY_OAUTH2URL: http://shopee-be-account-demo:8070
   CUSTOM_EMAIL_URL: http://shopee-be-email-demo:9000
-  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8072/eureka/
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://shopee-be-eureka-demo:8072/eureka/
 
 ---
 apiVersion: v1

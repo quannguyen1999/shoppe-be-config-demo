@@ -71,6 +71,11 @@ spec:
                 configMapKeyRef:
                   name: quannguyen1999-configmap
                   key: CUSTOM_EMAIL_URL
+            - name: SPRING_RABBITMQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: quannguyen1999-configmap
+                  key: SPRING_RABBITMQ_HOST
 ---
 apiVersion: v1
 kind: Service

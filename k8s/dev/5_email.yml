@@ -1,66 +1,62 @@
-#apiVersion: apps/v1
-#kind: Deployment
-#metadata:
-#  name: accounts-deployment
-#  labels:
-#    app: shopee-be-account-demo
-#spec:
-#  replicas: 1
-#  selector:
-#    matchLabels:
-#      app: shopee-be-account-demo
-#  template:
-#    metadata:
-#      labels:
-#        app: shopee-be-account-demo
-#    spec:
-#      containers:
-#        - name: shopee-be-account-demo
-#          image: quannguyen1999/shopee-be-account-demo
-#          imagePullPolicy: Never
-#          ports:
-#            - containerPort: 8070
-#          env:
-#            - name: SPRING_APPLICATION_NAME
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: quannguyen1999-configmap
-#                  key: ACCOUNT_APPLICATION_NAME
-#            - name: SPRING_PROFILES_ACTIVE
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: quannguyen1999-configmap
-#                  key: SPRING_PROFILES_ACTIVE
-#            - name: SPRING_CONFIG_IMPORT
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: quannguyen1999-configmap
-#                  key: SPRING_CONFIG_IMPORT
-#            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: quannguyen1999-configmap
-#                  key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-#            - name: SPRING_DATASOURCE_URL
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: quannguyen1999-configmap
-#                  key: SPRING_DATASOURCE_URL
-#            - name: SPRING_FLYWAY_URL
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: quannguyen1999-configmap
-#                  key: SPRING_FLYWAY_URL
-#---
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: shopee-be-account-demo
-#spec:
-#  selector:
-#    app: shopee-be-account-demo
-#  type: LoadBalancer
-#  ports:
-#    - protocol: TCP
-#      port: 8070
-#      targetPort: 8070
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopee-be-email-demo
+  labels:
+    app: shopee-be-email-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopee-be-email-demo
+  template:
+    metadata:
+      labels:
+        app: shopee-be-email-demo
+    spec:
+      containers:
+        - name: shopee-be-email-demo
+          image: quannguyen1999/shopee-be-email-demo
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9000
+          env:
+            - name: SPRING_APPLICATION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: quannguyen1999-configmap
+                  key: EMAIL_APPLICATION_NAME
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  name: quannguyen1999-configmap
+                  key: SPRING_PROFILES_ACTIVE
+            - name: SPRING_CONFIG_IMPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: quannguyen1999-configmap
+                  key: SPRING_CONFIG_IMPORT
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: quannguyen1999-configmap
+                  key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+            - name: SPRING_RABBITMQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: quannguyen1999-configmap
+                  key: SPRING_RABBITMQ_HOST
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopee-be-email-demo
+spec:
+  selector:
+    app: shopee-be-email-demo
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
