@@ -1,0 +1,32 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+deploymentName: shopee-be-eureka-demo
+serviceName: shopee-be-eureka-demo
+appLabel: shopee-be-eureka-demo
+appName: shopee-be-eureka-demo
+
+replicaCount: 1
+
+image:
+  repository: quannguyen1999/shopee-be-eureka-demo
+  tag: latest
+
+containerPort: 8072
+
+service:
+  type: LoadBalancer
+  port: 8072
+  targetPort: 8072
+
+appname_enabled: true
+profile_enabled: true
+config_enabled: true
+email_enabled: false
+eureka_enabled: false
+springDataSourceEnabled: false
+springFlywayUrlEnabled: false
+securityIssuerEnabled: false
+springSecurityOauth2IssuerUriEnabled: false
+customSecurityOauth2UrlEnabled: false
+customEmailUrlEnabled: false
+springRabbitmqHostEnabled: false

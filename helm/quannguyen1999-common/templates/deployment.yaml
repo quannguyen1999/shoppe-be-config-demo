@@ -18,6 +18,7 @@ spec:
       containers:
       - name: {{ .Values.appLabel }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Never
         ports:
         - containerPort: {{ .Values.containerPort }}
           protocol: TCP
@@ -54,7 +55,7 @@ spec:
               name: { { .Values.global.configMapName } }
               key: SPRING_DATASOURCE_URL
         {{ - end }}
-        {{ - if .Values.springFlywayUrl }}
+        {{ - if .Values.springFlywayUrlEnabled }}
         - name: SPRING_FLYWAY_URL
           valueFrom:
             configMapKeyRef:
@@ -62,11 +63,40 @@ spec:
               key: SPRING_FLYWAY_URL
         {{ - end }}
         {{ - if .Values.securityIssuerEnabled }}
-        - name: SECURITY_ISSUER
+        - name: CUSTOM-SECURITY_ISSUER
           valueFrom:
             configMapKeyRef:
               name: {{ .Values.global.configMapName }}
-              key: SECURITY_ISSUER
+              key: CUSTOM-SECURITY_ISSUER
         {{ - end }}
+        {{ - if .Values.springSecurityOauth2IssuerUriEnabled }}
+        - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.global.configMapName }}
+              key: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI
+        {{ - end }}
+        { { - if .Values.customSecurityOauth2UrlEnabled } }
+        - name: CUSTOM_SECURITY_OAUTH2URL
+          valueFrom:
+            configMapKeyRef:
+              name: { { .Values.global.configMapName } }
+              key: CUSTOM_SECURITY_OAUTH2URL
+        { { - end } }
+        { { - if .Values.customEmailUrlEnabled } }
+        - name: CUSTOM_EMAIL_URL
+          valueFrom:
+            configMapKeyRef:
+              name: { { .Values.global.configMapName } }
+              key: CUSTOM_EMAIL_URL
+        { { - end } }
+        { { - if .Values.springRabbitmqHostEnabled } }
+        - name: SPRING_RABBITMQ_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: { { .Values.global.configMapName } }
+              key: SPRING_RABBITMQ_HOST
+        { { - end } }
+
 
 {{- end -}}

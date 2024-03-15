@@ -1,0 +1,32 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+deploymentName: shopee-be-email-demo
+serviceName: shopee-be-email-demo
+appLabel: shopee-be-email-demo
+appName: shopee-be-email-demo
+
+replicaCount: 1
+
+image:
+  repository: quannguyen1999/shopee-be-email-demo
+  tag: latest
+
+containerPort: 9000
+
+service:
+  type: ClusterIP
+  port: 9000
+  targetPort: 9000
+
+appname_enabled: true
+profile_enabled: true
+config_enabled: true
+email_enabled: false
+eureka_enabled: true
+springDataSourceEnabled: false
+springFlywayUrlEnabled: false
+securityIssuerEnabled: false
+springSecurityOauth2IssuerUriEnabled: false
+customSecurityOauth2UrlEnabled: false
+customEmailUrlEnabled: false
+springRabbitmqHostEnabled: true

@@ -1,0 +1,12 @@
+global:
+  activeProfile: dev
+  configServerURL: configserver:http://configserver:8071/
+  flywayUrl:
+  dataSourceUrl:
+  jwtIssuerUri:
+  customSecurityIssuer:
+  customSecurityOauth2Url:
+  customEmailUrl:
+  serviceUrlDefaultZone:
+  configMapName: eazybankdev-configmap
+

@@ -33,4 +33,7 @@ kubectl delete -f <each file k8s>
 # install helm
 brew install helm
 
+# install package 
+helm dependencies build
+
 

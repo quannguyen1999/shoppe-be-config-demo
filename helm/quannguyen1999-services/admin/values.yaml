@@ -1,0 +1,31 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+deploymentName: shopee-be-admin-demo
+serviceName: shopee-be-admin-demo
+appLabel: shopee-be-admin-demo
+appName: shopee-be-admin-demo
+
+replicaCount: 1
+
+image:
+  repository: quannguyen1999/shopee-be-admin-demo
+  tag: latest
+
+containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
+appname_enabled: true
+profile_enabled: true
+config_enabled: true
+eureka_enabled: true
+springDataSourceEnabled: true
+springFlywayUrlEnabled: true
+securityIssuerEnabled: true
+springSecurityOauth2IssuerUriEnabled: true
+customSecurityOauth2UrlEnabled: true
+customEmailUrlEnabled: true
+springRabbitmqHostEnabled: true

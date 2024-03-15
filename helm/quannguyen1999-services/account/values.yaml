@@ -1,0 +1,31 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+deploymentName: shopee-be-account-demo
+serviceName: shopee-be-account-demo
+appLabel: shopee-be-account-demo
+appName: shopee-be-account-demo
+
+replicaCount: 1
+
+image:
+  repository: quannguyen1999/shopee-be-account-demo
+  tag: latest
+
+containerPort: 8070
+
+service:
+  type: LoadBalancer
+  port: 8070
+  targetPort: 8070
+
+appname_enabled: true
+profile_enabled: true
+config_enabled: true
+eureka_enabled: true
+springDataSourceEnabled: true
+springFlywayUrlEnabled: true
+securityIssuerEnabled: true
+springSecurityOauth2IssuerUriEnabled: false
+customSecurityOauth2UrlEnabled: false
+customEmailUrlEnabled: false
+springRabbitmqHostEnabled: false
